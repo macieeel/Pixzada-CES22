@@ -8,7 +8,7 @@ from flask_session import Session
 auth = Blueprint("auth", __name__)
 
 
-@auth.route("/@me")
+@auth.route("/@me", methods=["GET"])
 def get_current_user():
     user_id = session.get("user_id")
 
@@ -20,6 +20,20 @@ def get_current_user():
     return jsonify({
         "id": user.id,
         "nome": user.nome
+    })
+
+
+@auth.route("/rota")
+def funcao():
+    user_id = session.get("user_id")
+
+    # if not user_id:
+    #     return jsonify({"error": "Unauthorized"}), 401
+
+    # user = User.query.filter_by(id=user_id).first()
+
+    return jsonify({
+        "id": user_id
     })
 
 

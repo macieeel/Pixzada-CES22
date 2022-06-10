@@ -22,8 +22,10 @@ def create_app():
     app.config['SESSION_PERNAMENT'] = False
     app.config['SESSION_USER_SIGNER'] = True
     app.config['SESSION_REDIS'] = redis.from_url("redis://127.0.0.1:6379")
-
+    app.config.update(SESSION_COOKIE_SAMESITE="None",
+                      SESSION_COOKIE_SECURE=True)
     app.config['SECRET_KEY'] = 'lskjdahjsdh'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
     # app.config.from_object(ApplicationConfig)
